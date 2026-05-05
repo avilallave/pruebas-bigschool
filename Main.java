@@ -68,7 +68,7 @@ public class Main {
     private static void mostrarDespedida() {
         System.out.println();
         System.out.println("  ╔══════════════════════════════════════════╗");
-        System.out.println("  ║       ¡Hasta luego! Saliendo...  👋      ║");
+        System.out.println("  ║       ¡Hasta luego! Saliendo...  👋     ║");
         System.out.println("  ╚══════════════════════════════════════════╝");
         System.out.println();
     }
