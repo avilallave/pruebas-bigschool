@@ -21,6 +21,9 @@ public class Main {
                     operar(sc, calc, opcion);
                     break;
                 case "5":
+                    operarFactorial(sc, calc);
+                    break;
+                case "6":
                     salir = true;
                     mostrarDespedida();
                     break;
@@ -60,7 +63,8 @@ public class Main {
         System.out.println("  │   [2]  ➖  Restar                         │");
         System.out.println("  │   [3]  ✖️  Multiplicar                    │");
         System.out.println("  │   [4]  ➗  Dividir                        │");
-        System.out.println("  │   [5]  🚪  Salir                          │");
+        System.out.println("  │   [5]  ❗  Factorial (n!)                 │");
+        System.out.println("  │   [6]  🚪  Salir                          │");
         System.out.println("  └──────────────────────────────────────────┘");
         System.out.print("   ▶ Opción: ");
     }
@@ -107,6 +111,40 @@ public class Main {
             mostrarResultado(a, simbolo, b, resultado);
         } catch (ArithmeticException e) {
             mostrarError("Error: " + e.getMessage());
+        }
+    }
+
+    private static void operarFactorial(Scanner sc, Calculadora calc) {
+        int n = leerEntero(sc, "   ▶ Introduce un número entero no negativo: ");
+        try {
+            long resultado = calc.factorial(n);
+            mostrarResultadoFactorial(n, resultado);
+        } catch (ArithmeticException | IllegalArgumentException e) {
+            mostrarError("Error: " + e.getMessage());
+        }
+    }
+
+    private static void mostrarResultadoFactorial(int n, long resultado) {
+        String linea = "  " + n + "! = " + resultado;
+        int ancho = Math.max(linea.length() + 4, 44);
+        String borde = repetir("─", ancho - 2);
+        System.out.println();
+        System.out.println("  ┌" + borde + "┐");
+        System.out.println("  │" + centrar("RESULTADO", ancho - 2) + "│");
+        System.out.println("  ├" + borde + "┤");
+        System.out.println("  │" + centrar(linea.trim(), ancho - 2) + "│");
+        System.out.println("  └" + borde + "┘");
+    }
+
+    private static int leerEntero(Scanner sc, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            String linea = sc.nextLine().trim();
+            try {
+                return Integer.parseInt(linea);
+            } catch (NumberFormatException e) {
+                mostrarError("Valor no válido, introduce un número entero.");
+            }
         }
     }
 
