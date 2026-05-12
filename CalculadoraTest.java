@@ -245,4 +245,41 @@ public class CalculadoraTest {
                 "El mensaje debería mencionar la división entre 0",
                 ex.getMessage() != null && ex.getMessage().contains("0"));
     }
+
+    // ---------- Tests de factorial ----------
+
+    @Test
+    public void factorial_deCero_devuelveUno() {
+        assertEquals(1L, calc.factorial(0));
+    }
+
+    @Test
+    public void factorial_deUno_devuelveUno() {
+        assertEquals(1L, calc.factorial(1));
+    }
+
+    @Test
+    public void factorial_deCinco_devuelveCientoVeinte() {
+        assertEquals(120L, calc.factorial(5));
+    }
+
+    @Test
+    public void factorial_deDiez_devuelveValorEsperado() {
+        assertEquals(3628800L, calc.factorial(10));
+    }
+
+    @Test
+    public void factorial_deVeinte_devuelveValorMaximoSinDesbordamiento() {
+        assertEquals(2432902008176640000L, calc.factorial(20));
+    }
+
+    @Test
+    public void factorial_deNumeroNegativo_lanzaIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> calc.factorial(-1));
+    }
+
+    @Test
+    public void factorial_cuandoNMayorQueVeinte_lanzaArithmeticException() {
+        assertThrows(ArithmeticException.class, () -> calc.factorial(21));
+    }
 }
